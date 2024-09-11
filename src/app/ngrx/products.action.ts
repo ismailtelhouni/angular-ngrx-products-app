@@ -18,9 +18,14 @@ export enum ProductActionTypes {
     SEARCH_PRODUCTS_ERROR="[Product] Search Products Error",
 
     // Select Product
-    SELECT_PRODUCTS="[Product] Select Products",
-    SELECT_PRODUCTS_SUCCESS="[Product] Select Products Success",
-    SELECT_PRODUCTS_ERROR="[Product] Select Products Error",
+    SELECT_PRODUCTS="[Product] Select Product",
+    SELECT_PRODUCTS_SUCCESS="[Product] Select Product Success",
+    SELECT_PRODUCTS_ERROR="[Product] Select Product Error",
+
+    // Delete Product
+    DELETE_PRODUCT="[Product] Delete Product",
+    DELETE_PRODUCT_SUCCESS="[Product] Delete Product Success",
+    DELETE_PRODUCT_ERROR="[Product] Delete Product Error",
 }
 
 // Get All Products
@@ -111,9 +116,32 @@ export class SelectProductActionError implements Action {
 
 }
 
+// Delete product
+export class DeleteProductAction implements Action {
+    type: ProductActionTypes = ProductActionTypes.DELETE_PRODUCT;
+
+    constructor(public payload:Product) {}
+
+}
+
+export class DeleteProductActionSuccess implements Action {
+    type: ProductActionTypes = ProductActionTypes.DELETE_PRODUCT_SUCCESS;
+
+    constructor(public payload:Product) {}
+
+}
+
+export class DeleteProductActionError implements Action {
+    type: ProductActionTypes = ProductActionTypes.DELETE_PRODUCT_ERROR;
+
+    constructor(public payload:string) {}
+
+}
+
 export type ProductsAction = 
     GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError | 
     GetSelectedProductsAction | GetSelectedProductsActionSuccess | GetSelectedProductsActionError |
     SearchProductsAction | SearchProductsActionSuccess | SearchProductsActionError |
-    SelectProductAction | SelectProductActionSuccess | SelectProductActionError
+    SelectProductAction | SelectProductActionSuccess | SelectProductActionError |
+    DeleteProductAction | DeleteProductActionSuccess | DeleteProductActionError
 ;
