@@ -2,11 +2,18 @@ import { Action } from "@ngrx/store";
 import { Product } from "../model/product.model";
 
 export enum ProductActionTypes {
+    // Get All Products
     GET_ALL_PRODUCTS="[Product] Get All Products",
     GET_ALL_PRODUCTS_SUCCESS="[Product] Get All Products Success",
     GET_ALL_PRODUCTS_ERROR="[Product] Get All Products Error",
+
+    // Get Selected Products
+    GET_SELECTED_PRODUCTS="[Product] Get Selected Products",
+    GET_SELECTED_PRODUCTS_SUCCESS="[Product] Get Selected Products Success",
+    GET_SELECTED_PRODUCTS_ERROR="[Product] Get Selected Products Error",
 }
 
+// Get All Products
 export class GetAllProductsAction implements Action {
     type: ProductActionTypes = ProductActionTypes.GET_ALL_PRODUCTS;
 
@@ -28,4 +35,29 @@ export class GetAllProductsActionError implements Action {
 
 }
 
-export type ProductsAction = GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError;
+// Get Selected Products
+export class GetSelectedProductsAction implements Action {
+    type: ProductActionTypes = ProductActionTypes.GET_SELECTED_PRODUCTS;
+
+    constructor(public payload:any) {}
+
+}
+
+export class GetSelectedProductsActionSuccess implements Action {
+    type: ProductActionTypes = ProductActionTypes.GET_ALL_PRODUCTS_SUCCESS;
+
+    constructor(public payload:Product[]) {}
+
+}
+
+export class GetSelectedProductsActionError implements Action {
+    type: ProductActionTypes = ProductActionTypes.GET_ALL_PRODUCTS_ERROR;
+
+    constructor(public payload:string) {}
+
+}
+
+export type ProductsAction = 
+    GetAllProductsAction | GetAllProductsActionSuccess | GetAllProductsActionError| 
+    GetSelectedProductsAction | GetSelectedProductsActionSuccess | GetSelectedProductsActionError
+;

@@ -23,13 +23,24 @@ const initialState: ProductsState = {
 
 export function productsReducer(state:ProductsState=initialState , action:Action):ProductsState{
     switch(action.type){
+        
+        // Get All Products
         case ProductActionTypes.GET_ALL_PRODUCTS:
             return {...state, dataState: ProductStateEnum.LOADING};
         case ProductActionTypes.GET_ALL_PRODUCTS_SUCCESS:
             return {...state, dataState: ProductStateEnum.LOADED, products: (<ProductsAction>action).payload};
         case ProductActionTypes.GET_ALL_PRODUCTS_ERROR:
             return {...state, dataState: ProductStateEnum.ERROR, errorMessage: (<ProductsAction>action).payload};
-        default:
+        
+        // Get Selected Products
+        case ProductActionTypes.GET_SELECTED_PRODUCTS:
+            return {...state, dataState: ProductStateEnum.LOADING};
+        case ProductActionTypes.GET_SELECTED_PRODUCTS_SUCCESS:
+            return {...state, dataState: ProductStateEnum.LOADED, products: (<ProductsAction>action).payload};
+        case ProductActionTypes.GET_SELECTED_PRODUCTS_ERROR:
+            return {...state, dataState: ProductStateEnum.ERROR, errorMessage: (<ProductsAction>action).payload};
+        
+            default:
             return {...state};  
     }
 }

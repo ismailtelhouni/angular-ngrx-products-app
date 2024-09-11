@@ -1,4 +1,4 @@
-<div>
+<div class="my-4 mx-5" >
     <app-products-nav-bar></app-products-nav-bar>
     <ng-container *ngIf="productsState$ | async as state" [ngSwitch]="state.dataState">
         <ng-container *ngSwitchCase="ProductStateEnum.INITIAL"  >
