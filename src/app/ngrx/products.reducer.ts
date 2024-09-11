@@ -40,6 +40,14 @@ export function productsReducer(state:ProductsState=initialState , action:Action
         case ProductActionTypes.GET_SELECTED_PRODUCTS_ERROR:
             return {...state, dataState: ProductStateEnum.ERROR, errorMessage: (<ProductsAction>action).payload};
         
+        // Search Products
+        case ProductActionTypes.SEARCH_PRODUCTS:
+            return {...state, dataState: ProductStateEnum.LOADING};
+        case ProductActionTypes.SEARCH_PRODUCTS_SUCCESS:
+            return {...state, dataState: ProductStateEnum.LOADED, products: (<ProductsAction>action).payload};
+        case ProductActionTypes.SEARCH_PRODUCTS_ERROR:
+            return {...state, dataState: ProductStateEnum.ERROR, errorMessage: (<ProductsAction>action).payload};
+
             default:
             return {...state};  
     }

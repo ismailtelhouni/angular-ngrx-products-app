@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetAllProductsAction, GetSelectedProductsAction } from 'src/app/ngrx/products.action';
+import { GetAllProductsAction, GetSelectedProductsAction, SearchProductsAction } from 'src/app/ngrx/products.action';
 
 @Component({
   selector: 'app-products-nav-bar',
@@ -22,6 +22,11 @@ export class ProductsNavBarComponent implements OnInit {
 
   onGetSelectedProducts(){
     this.store.dispatch(new GetSelectedProductsAction({}));
+  }
+
+  onSearch(data:any){
+    console.log(data.keyword);
+    this.store.dispatch(new SearchProductsAction(data.keyword));
   }
 
 }

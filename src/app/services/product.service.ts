@@ -29,7 +29,7 @@ export class ProductService {
   }
 
   public searchProducts(name:string):Observable<Product[]>{
-    return this.http.get<Product[]>(environment.host+"/products?name_like="+name);
+    return this.http.get<Product[]>(environment.host+"/products?name="+name);
   }
   public setSelected(product:Product):Observable<Product>{
     return this.http.put<Product>(environment.host+"/products/"+product.id,{...product,selected:!product.selected});

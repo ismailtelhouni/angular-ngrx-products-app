@@ -2,8 +2,16 @@ import { Injectable } from "@angular/core";
 import { ProductService } from "../services/product.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, Observable, of } from "rxjs";
-import { Action } from "@ngrx/store";
-import { GetAllProductsActionError, GetAllProductsActionSuccess, GetSelectedProductsActionError, GetSelectedProductsActionSuccess, ProductActionTypes } from "./products.action";
+import { 
+    GetAllProductsActionError, 
+    GetAllProductsActionSuccess, 
+    GetSelectedProductsActionError, 
+    GetSelectedProductsActionSuccess, 
+    ProductActionTypes, 
+    ProductsAction, 
+    SearchProductsActionError, 
+    SearchProductsActionSuccess 
+} from "./products.action";
 
 @Injectable()
 export class ProductsEffects {
@@ -13,26 +21,39 @@ export class ProductsEffects {
     ) {}
 
     // Get All Products
-    getAllProductsEffect:Observable<Action> = createEffect(
+    getAllProductsEffect:Observable<ProductsAction> = createEffect(
         () => this.effectsAction.pipe(
             ofType(ProductActionTypes.GET_ALL_PRODUCTS),
-            mergeMap((action)=>{
+            mergeMap((action:ProductsAction)=>{
                 return this.productService.getProducts().pipe(
                     map((products)=> new GetAllProductsActionSuccess(products)),
-                    catchError((error)=> of(new GetAllProductsActionError(error)))
+                    catchError((error)=> of(new GetAllProductsActionError(error.message)))
                 );
             })  
         )
     );
 
     // Get Selected Products
-    getSelectedProductsEffect:Observable<Action> = createEffect(
+    getSelectedProductsEffect:Observable<ProductsAction> = createEffect(
         () => this.effectsAction.pipe(
             ofType(ProductActionTypes.GET_SELECTED_PRODUCTS),
-            mergeMap((action)=>{
+            mergeMap((action:ProductsAction)=>{
                 return this.productService.getSelectedProducts().pipe(
                     map((products)=> new GetSelectedProductsActionSuccess(products)),
-                    catchError((error)=> of(new GetSelectedProductsActionError(error)))
+                    catchError((error)=> of(new GetSelectedProductsActionError(error.message)))
+                );
+            })  
+        )
+    );
+
+    // Search Products
+    SearchProductsEffect:Observable<ProductsAction> = createEffect(
+        () => this.effectsAction.pipe(
+            ofType(ProductActionTypes.SEARCH_PRODUCTS),
+            mergeMap((action:ProductsAction)=>{
+                return this.productService.searchProducts(action.payload).pipe(
+                    map((products)=> new SearchProductsActionSuccess(products)),
+                    catchError((error)=> of(new SearchProductsActionError(error.message)))
                 );
             })  
         )
