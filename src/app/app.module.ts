@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { productsReducer } from './ngrx/products.reducer';
+import { ProductsEffects } from './ngrx/products.effects';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({catalogState:productsReducer}),
+    EffectsModule.forRoot([ProductsEffects]),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],
