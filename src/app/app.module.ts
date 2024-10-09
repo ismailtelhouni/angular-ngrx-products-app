@@ -14,6 +14,7 @@ import { ProductsEffects } from './ngrx/products.effects';
 import { ProductsListComponent } from './components/products/products-list/products-list.component';
 import { ProductsItemComponent } from './components/products/products-item/products-item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BackgroundDirective } from './utils/custumDirective/Backround.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductsComponent,
     ProductsNavBarComponent,
     ProductsListComponent,
-    ProductsItemComponent
+    ProductsItemComponent,
+    BackgroundDirective
   ],
   imports: [
     BrowserModule,
